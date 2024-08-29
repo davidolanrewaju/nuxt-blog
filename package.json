@@ -12,5 +12,11 @@
   "dependencies": {
     "nuxt": "^3.13.0",
     "vue": "latest"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.18.1",
+    "@nuxtjs/tailwindcss": "^6.12.1",
+    "@types/node": "^22.5.1",
+    "typescript": "^5.5.4"
   }
 }
