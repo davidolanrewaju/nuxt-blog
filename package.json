@@ -10,13 +10,18 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
     "nuxt": "^3.13.0",
-    "vue": "latest"
+    "swiper": "^11.1.11",
+    "vue": "^3.4.38"
   },
   "devDependencies": {
     "@nuxt/types": "^2.18.1",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@types/node": "^22.5.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.10",
     "typescript": "^5.5.4"
   }
 }

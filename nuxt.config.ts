@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     public: {
-      apiKey: '6963a7ab8e04414faaf88818fad733a9',
+      apiKey: '0aebb269250a477d9a67f31477654ee5',
       apiBaseUrl: 'https://newsapi.org/v2'
     }
   },
