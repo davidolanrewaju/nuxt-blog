@@ -51,7 +51,7 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import useEntertainmentNews from "~/composables/useEntertainment";
+import useEntertainmentNews from "~/composables/useEntertainmentNews";
 import NewsCard from "~/components/NewsCard.vue";
 
 const { articles, loading, error } = useEntertainmentNews();

@@ -29,7 +29,7 @@
   <script setup>
   import { onMounted, computed } from "vue";
   import { useRoute } from "vue-router";
-  import useEntertainmentNews from "~/composables/useEntertainment";
+  import useEntertainmentNews from "~/composables/useEntertainmentNews";
   import defaultImage from "../../assets/images/default-image.jpg";
   
   const { article, loading, error, fetchSingleEntertainmentNews } = useEntertainmentNews();
