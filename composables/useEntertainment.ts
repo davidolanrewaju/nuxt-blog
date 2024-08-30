@@ -12,7 +12,7 @@ interface Article {
   urlToImage: string;
 }
 
-export default function useSportNews() {
+export default function useEntertainmentNews() {
   const articles: Ref<Article[]> = ref([]);
   const article: Ref<Article | null> = ref(null);
   const loading: Ref<boolean> = ref(false);
@@ -20,13 +20,13 @@ export default function useSportNews() {
 
   const config = useRuntimeConfig();
 
-  const fetchSportNews = async (): Promise<void> => {
+  const fetchEntertainmentNews = async (): Promise<void> => {
     loading.value = true;
     error.value = null;
 
     try {
       const response = await fetch(
-        `${config.public.apiBaseUrl}/top-headlines?category=sports&language=en&excludeDomains=yahoo.com&apiKey=${config.public.apiKey}`
+        `${config.public.apiBaseUrl}/top-headlines?category=entertainment&language=en&excludeDomains=yahoo.com&apiKey=${config.public.apiKey}`
       );
 
       if (!response.ok) {
@@ -34,6 +34,7 @@ export default function useSportNews() {
       }
 
       const data = await response.json();
+      console.log(data);
       articles.value = data.articles.filter((article: Article) => article.author !== null);
     } catch (e) {
       error.value = e instanceof Error ? e.message : "An unknown error occurred";
@@ -42,7 +43,7 @@ export default function useSportNews() {
     }
   };
 
-  const fetchSingleSportNews = async (title: string): Promise<void> => {
+  const fetchSingleEntertainmentNews = async (title: string): Promise<void> => {
     loading.value = true;
     error.value = null;
 
@@ -58,6 +59,7 @@ export default function useSportNews() {
       const data = await response.json();
       console.log(data);
       article.value = data.articles?.[0] ?? null;
+      console.log(article.value);
     } catch (e) {
       error.value = e instanceof Error ? e.message : "An unknown error occurred";
     } finally {
@@ -65,7 +67,7 @@ export default function useSportNews() {
     }
   };
 
-  onMounted(fetchSportNews);
+  onMounted(fetchEntertainmentNews);
 
-  return { articles, loading, error, article, fetchSportNews, fetchSingleSportNews };
+  return { articles, loading, error, article, fetchEntertainmentNews, fetchSingleEntertainmentNews };
 }
