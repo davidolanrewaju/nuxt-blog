@@ -4,8 +4,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     public: {
-      apiKey: '6963a7ab8e04414faaf88818fad733a9',
-      apiBaseUrl: 'https://newsapi.org/v2'
+      apiKey: process.env.NEWS_API_KEY,
+      apiBaseUrl: process.env.NEWS_API_BASE_URL
     }
   },
   typescript: {
