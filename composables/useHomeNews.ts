@@ -22,12 +22,11 @@ export default function useHomeNews() {
     error.value = null;
 
     try {
-      const response = await fetch('/api/homeNews?endpoint=everything&q=*&language=en&excludeDomains=yahoo.com');
+      const response = await fetch('/api/news?endpoint=everything&q=*&language=en&excludeDomains=yahoo.com');
       if (!response.ok) {
         throw new Error(`Failed to fetch news: ${response.statusText}`);
       }
       const data = await response.json();
-      console.log(data);
       articles.value = data.articles.filter((article: Article) => article.author !== null);
     } catch (e) {
       error.value = e instanceof Error ? e.message : "An unknown error occurred";
@@ -41,7 +40,7 @@ export default function useHomeNews() {
     error.value = null;
 
     try {
-      const response = await fetch(`/api/homeNews?endpoint=everything&q=${encodeURIComponent(title)}&searchIn=title`);
+      const response = await fetch(`/api/news?endpoint=everything&q=${encodeURIComponent(title)}&searchIn=title`);
       if (!response.ok) {
         throw new Error(`Failed to fetch news: ${response.statusText}`);
       }

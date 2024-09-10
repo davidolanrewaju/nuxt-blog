@@ -18,21 +18,15 @@ export default function useTechNews() {
   const loading: Ref<boolean> = ref(false);
   const error: Ref<string | null> = ref(null);
 
-  const config = useRuntimeConfig();
-
   const fetchTechNews = async (): Promise<void> => {
     loading.value = true;
     error.value = null;
 
     try {
-      const response = await fetch(
-        `${config.public.apiBaseUrl}/top-headlines?category=technology&language=en&excludeDomains=yahoo.com&apiKey=${config.public.apiKey}`
-      );
-
+      const response = await fetch('/api/category?endpoint=top-headlines&category=technology&language=en&excludeDomains=yahoo.com');
       if (!response.ok) {
         throw new Error(`Failed to fetch news: ${response.statusText}`);
       }
-
       const data = await response.json();
       articles.value = data.articles.filter((article: Article) => article.author !== null);
     } catch (e) {
@@ -47,18 +41,12 @@ export default function useTechNews() {
     error.value = null;
 
     try {
-      const response = await fetch(
-        `${config.public.apiBaseUrl}/everything?q=${encodeURIComponent(title)}&searchIn=title&apiKey=${config.public.apiKey}`
-      );
-
+      const response = await fetch(`/api/news?endpoint=everything&q=${encodeURIComponent(title)}&searchIn=title`);
       if (!response.ok) {
         throw new Error(`Failed to fetch news: ${response.statusText}`);
       }
-
       const data = await response.json();
-      console.log(data);
       article.value = data.articles?.[0] ?? null;
-      console.log(article.value);
     } catch (e) {
       error.value = e instanceof Error ? e.message : "An unknown error occurred";
     } finally {
