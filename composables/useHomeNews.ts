@@ -1,5 +1,4 @@
 import { ref, onMounted, type Ref } from "vue";
-import { useRuntimeConfig } from "#app";
 
 interface Article {
   author: string;
@@ -18,22 +17,17 @@ export default function useHomeNews() {
   const loading: Ref<boolean> = ref(false);
   const error: Ref<string | null> = ref(null);
 
-  const config = useRuntimeConfig();
-
   const fetchHomeNews = async (): Promise<void> => {
     loading.value = true;
     error.value = null;
 
     try {
-      const response = await fetch(
-        `${config.public.apiBaseUrl}/everything?q=*&language=en&excludeDomains=yahoo.com&apiKey=${config.public.apiKey}`
-      );
-
+      const response = await fetch('/api/homeNews?endpoint=everything&q=*&language=en&excludeDomains=yahoo.com');
       if (!response.ok) {
         throw new Error(`Failed to fetch news: ${response.statusText}`);
       }
-
       const data = await response.json();
+      console.log(data);
       articles.value = data.articles.filter((article: Article) => article.author !== null);
     } catch (e) {
       error.value = e instanceof Error ? e.message : "An unknown error occurred";
@@ -47,14 +41,10 @@ export default function useHomeNews() {
     error.value = null;
 
     try {
-      const response = await fetch(
-        `${config.public.apiBaseUrl}/everything?q=${encodeURIComponent(title)}&searchIn=title&apiKey=${config.public.apiKey}`
-      );
-
+      const response = await fetch(`/api/homeNews?endpoint=everything&q=${encodeURIComponent(title)}&searchIn=title`);
       if (!response.ok) {
         throw new Error(`Failed to fetch news: ${response.statusText}`);
       }
-
       const data = await response.json();
       article.value = data.articles?.[0] ?? null;
     } catch (e) {
