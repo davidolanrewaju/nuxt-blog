@@ -41,12 +41,12 @@ export default function useSportNews() {
     error.value = null;
 
     try {
-      const response = await fetch(`/api/news?endpoint=everything&q=${encodeURIComponent(title)}&searchIn=title`);
+      const response = await fetch(`/api/single?endpoint=everything&q=${encodeURIComponent(title)}&searchIn=title`);
       if (!response.ok) {
         throw new Error(`Failed to fetch news: ${response.statusText}`);
       }
       const data = await response.json();
-      article.value = data.articles?.[0] ?? null;
+      article.value = data.articles?.[0];
     } catch (e) {
       error.value = e instanceof Error ? e.message : "An unknown error occurred";
     } finally {

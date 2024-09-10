@@ -39,7 +39,7 @@ import useBusinessNews from "~/composables/useBusinessNews";
 import defaultImage from "../../assets/images/default-image.jpg";
 
 const { article, loading, error, fetchSingleBusinessNews } = useBusinessNews();
-console.log(article);
+console.log(article)
 
 onMounted(() => {
   const { title } = useRoute().params;

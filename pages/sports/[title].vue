@@ -3,7 +3,11 @@
     <div v-if="loading" class="text-center">Loading...</div>
     <div v-if="error" class="text-center text-red-600">{{ error }}</div>
 
-    <div v-if="article" class="space-y-4 md:space-y-6">
+    <div v-if="article == null" class="text-center text-gray-600">
+      Article not available
+    </div>
+
+    <div v-if="article && article.title" class="space-y-4 md:space-y-6">
       <h2 class="font-dmserif text-2xl md:text-3xl lg:text-4xl pb-2 md:pb-4">
         {{ article.title }}
       </h2>
@@ -24,9 +28,9 @@
         <button
           class="w-full border-2 border-gray-900 bg-transparent text-lg md:text-xl font-semibold text-gray-900 hover:text-white hover:border-transparent hover:bg-gray-900 my-6 md:my-8 py-2 md:py-3 rounded transition duration-300"
         >
-          <a :href="article.url" target="_blank" class="block w-full h-full"
-            >Read More</a
-          >
+          <a :href="article.url" target="_blank" class="block w-full h-full">
+            Read More
+          </a>
         </button>
       </div>
     </div>
@@ -39,7 +43,6 @@ import useSportNews from "~/composables/useSportNews";
 import defaultImage from "../../assets/images/default-image.jpg";
 
 const { article, loading, error, fetchSingleSportNews } = useSportNews();
-
 onMounted(() => {
   const { title } = useRoute().params;
   if (title) {

@@ -1,6 +1,6 @@
 <template>
   <div class="px-4 md:px-8 lg:px-16 xl:px-20 max-w-full">
-    <div class="flex items-center text-2xl" v-if="loading">
+    <div class="text-center" v-if="loading">
       <p>Loading...</p>
     </div>
 

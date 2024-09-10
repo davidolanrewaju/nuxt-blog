@@ -28,7 +28,6 @@ export default function useBusinessNews() {
         throw new Error(`Failed to fetch news: ${response.statusText}`);
       }
       const data = await response.json();
-      console.log(data);
       articles.value = data.articles.filter((article: Article) => article.author !== null);
     } catch (e) {
       error.value = e instanceof Error ? e.message : "An unknown error occurred";
@@ -42,7 +41,8 @@ export default function useBusinessNews() {
     error.value = null;
 
     try {
-      const response = await fetch(`/api/news?endpoint=everything&q=${encodeURIComponent(title)}&searchIn=title`);
+      const response = await fetch(`/api/single?endpoint=everything&q=${encodeURIComponent(title)}&searchIn=title`);
+      console.log(response);
       if (!response.ok) {
         throw new Error(`Failed to fetch news: ${response.statusText}`);
       }

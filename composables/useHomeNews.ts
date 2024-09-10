@@ -40,7 +40,7 @@ export default function useHomeNews() {
     error.value = null;
 
     try {
-      const response = await fetch(`/api/news?endpoint=everything&q=${encodeURIComponent(title)}&searchIn=title`);
+      const response = await fetch(`/api/single?endpoint=everything&q=${encodeURIComponent(title)}&searchIn=title`);
       if (!response.ok) {
         throw new Error(`Failed to fetch news: ${response.statusText}`);
       }
