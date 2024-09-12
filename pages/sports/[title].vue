@@ -34,6 +34,10 @@
         </button>
       </div>
     </div>
+
+    <div v-if="!loading && !article && !error" class="text-center text-xl md:text-2xl text-gray-700">
+      This article is not available
+    </div>
   </div>
 </template>
 

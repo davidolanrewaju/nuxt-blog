@@ -30,6 +30,10 @@
         </button>
       </div>
     </div>
+
+    <div v-if="!article" class="text-center text-xl md:text-2xl text-gray-700">
+      This article is not available
+    </div>
   </div>
 </template>
 

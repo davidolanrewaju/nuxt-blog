@@ -30,6 +30,10 @@
         </button>
       </div>
     </div>
+
+    <div v-if="!loading && !article && !error" class="text-center text-xl md:text-2xl text-gray-700">
+      This article is not available
+    </div>
   </div>
 </template>
 
@@ -38,12 +42,13 @@ import { onMounted, computed } from "vue";
 import useHomeNews from "~/composables/useHomeNews";
 import defaultImage from "../assets/images/default-image.jpg";
 
+const route = useRoute();
 const { article, loading, error, fetchSingleHomeNews } = useHomeNews();
 
-onMounted(() => {
-  const { title } = useRoute().params;
+onMounted(async () => {
+  const { title } = route.params;
   if (title) {
-    fetchSingleHomeNews(title);
+    await fetchSingleHomeNews(decodeURIComponent(title));
   }
 });
 
